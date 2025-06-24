@@ -1,0 +1,44 @@
+.merchant-dashboard-container {
+  padding: 40px;
+}
+
+.dashboard-title {
+  font-size: 28px;
+  margin-bottom: 30px;
+}
+
+.card-row {
+  display: flex;
+  gap: 30px;
+  flex-wrap: wrap;
+}
+
+.dashboard-card {
+  width: 280px;
+  background: white;
+  padding: 25px;
+  border-radius: 10px;
+  box-shadow: 0px 4px 12px rgba(0,0,0,0.1);
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.dashboard-card:hover {
+  transform: translateY(-5px);
+}
+
+.dashboard-icon {
+  font-size: 26px;
+  margin-bottom: 10px;
+  color: purple;
+}
+
+.card-title {
+  margin-bottom: 5px;
+  font-size: 18px;
+}
+
+.card-description {
+  font-size: 14px;
+  color: #333;
+}

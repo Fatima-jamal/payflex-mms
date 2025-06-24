@@ -1,0 +1,40 @@
+.approved-merchants-page {
+  padding: 50px 60px 60px 380px;
+  background-color: #fafafa;
+  min-height: 100vh;
+  font-family: "Segoe UI", sans-serif;
+}
+
+.approved-merchants-page h2 {
+  font-size: 28px;
+  margin-bottom: 25px;
+  font-weight: 600;
+  color: #222;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  background-color: white;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+}
+
+th, td {
+  padding: 12px 16px;
+  text-align: left;
+  border-bottom: 1px solid #eee;
+  font-size: 14.5px;
+}
+
+th {
+  background-color: #f2e8ff;
+  color: #4b0082;
+  font-weight: 600;
+  font-size: 15px;
+}
+
+tr:hover {
+  background-color: #f9f5ff;
+}

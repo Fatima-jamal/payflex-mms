@@ -1,0 +1,65 @@
+.merchant-requests-page {
+  padding: 50px 60px 60px 380px;
+  background-color: #fdfcfe;
+  min-height: 100vh;
+  font-family: "Segoe UI", sans-serif;
+}
+
+.merchant-requests-page h2 {
+  font-size: 28px;
+  margin-bottom: 25px;
+  font-weight: 600;
+  color: #222;
+}
+
+.table-wrapper {
+  overflow-x: auto;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  background-color: white;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+th, td {
+  padding: 12px 16px;
+  text-align: left;
+  border-bottom: 1px solid #eee;
+  font-size: 14.5px;
+}
+
+th {
+  background-color: #f2e8ff;
+  color: #4b0082;
+  font-weight: 600;
+  font-size: 15px;
+}
+
+tr:hover {
+  background-color: #faf4ff;
+}
+
+.approve-btn,
+.reject-btn {
+  padding: 6px 10px;
+  margin-right: 5px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 13px;
+  font-weight: 500;
+}
+
+.approve-btn {
+  background-color: #6fcf97;
+  color: white;
+}
+
+.reject-btn {
+  background-color: #eb5757;
+  color: white;
+}
