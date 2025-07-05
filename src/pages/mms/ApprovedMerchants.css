@@ -38,3 +38,17 @@ th {
 tr:hover {
   background-color: #f9f5ff;
 }
+.purple-button {
+  background-color: #8000ff;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 6px;
+  cursor: pointer;
+  margin-top: 6px;
+  font-size: 13px;
+}
+
+.purple-button:hover {
+  background-color: #6200cc;
+}

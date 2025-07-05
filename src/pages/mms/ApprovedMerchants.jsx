@@ -1,24 +1,27 @@
-import React, { useEffect, useState } from "react";
-import "./ApprovedMerchants.css";
+import React, { useEffect, useState } from 'react';
+import axios from 'axios';
+import './ApprovedMerchants.css';
 
-function ApprovedMerchants() {
-  const [merchants, setMerchants] = useState([]);
-  const [showPasswordId, setShowPasswordId] = useState(null);
+const ApprovedMerchants = () => {
+  const [approvedMerchants, setApprovedMerchants] = useState([]);
+  const [visiblePasswords, setVisiblePasswords] = useState({});
 
   useEffect(() => {
-    fetch("http://localhost:8081/api/merchants/approved")
-      .then((res) => res.json())
-      .then((data) => setMerchants(data))
-      .catch((err) => console.error("Error fetching merchants:", err));
+    axios
+      .get('http://localhost:8081/api/merchants/approved')
+      .then((response) => {
+        setApprovedMerchants(response.data);
+      })
+      .catch((error) => {
+        console.error('Error fetching approved merchants:', error);
+      });
   }, []);
 
-  const togglePassword = (id) => {
-    setShowPasswordId((prevId) => (prevId === id ? null : id));
-  };
-
-  const handleEmail = (merchant) => {
-    const body = `Your MID is ${merchant.mid} and your password is ${merchant.password}`;
-    window.location.href = `mailto:${merchant.email}?subject=Your PayFlex Credentials&body=${encodeURIComponent(body)}`;
+  const togglePasswordVisibility = (mid) => {
+    setVisiblePasswords((prev) => ({
+      ...prev,
+      [mid]: !prev[mid],
+    }));
   };
 
   return (
@@ -39,23 +42,26 @@ function ApprovedMerchants() {
           </tr>
         </thead>
         <tbody>
-          {merchants.map((merchant) => (
+          {approvedMerchants.map((merchant) => (
             <tr key={merchant.id}>
-              <td>{merchant.dba || "-"}</td>
-              <td>{merchant.mid}</td>
-              <td>{merchant.cnic || "-"}</td>
-              <td>{merchant.phone || merchant.mobile_number || "-"}</td>
-              <td>{merchant.city || "-"}</td>
-              <td>{merchant.name || "-"}</td>
-              <td style={{ whiteSpace: "pre-line" }}>{merchant.address || "-"}</td>
+              <td>{merchant.dba || '-'}</td>
+              <td>{merchant.mid || '-'}</td>
+              <td>{merchant.cnic || '-'}</td>
+              <td>{merchant.phone || '-'}</td>
+              <td>{merchant.city || '-'}</td>
+              <td>{merchant.name || '-'}</td>
+              <td>{merchant.address || '-'}</td>
               <td>
-                <b>{merchant.email}</b><br />
-                <button onClick={() => handleEmail(merchant)} style={emailBtnStyle}>Email Credentials</button>
+                <strong>{merchant.email}</strong>
+                <br />
+                <button className="purple-button">Email Credentials</button>
               </td>
               <td>
-                {showPasswordId === merchant.id ? merchant.password : "••••••••"}
+                {visiblePasswords[merchant.mid] ? merchant.password : '••••••••'}
                 <br />
-                <button onClick={() => togglePassword(merchant.id)} style={showBtnStyle}>Show</button>
+                <button className="purple-button" onClick={() => togglePasswordVisibility(merchant.mid)}>
+                  {visiblePasswords[merchant.mid] ? 'Hide' : 'Show'}
+                </button>
               </td>
             </tr>
           ))}
@@ -63,28 +69,6 @@ function ApprovedMerchants() {
       </table>
     </div>
   );
-}
-
-const emailBtnStyle = {
-  backgroundColor: "#8000c8",
-  color: "white",
-  border: "none",
-  borderRadius: "6px",
-  padding: "4px 8px",
-  fontSize: "12px",
-  cursor: "pointer",
-  marginTop: "6px",
-};
-
-const showBtnStyle = {
-  backgroundColor: "#8000c8",  // updated here
-  color: "white",
-  border: "none",
-  borderRadius: "6px",
-  padding: "4px 8px",
-  fontSize: "12px",
-  cursor: "pointer",
-  marginTop: "6px",
 };
 
 export default ApprovedMerchants;
