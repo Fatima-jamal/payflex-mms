@@ -5,6 +5,7 @@ import Dashboard from "./pages/mms/Dashboard";
 import AddMerchantForm from "./pages/mms/AddMerchantForm";
 import MerchantRequests from "./pages/mms/MerchantRequests";
 import ApprovedMerchants from "./pages/mms/ApprovedMerchants";
+import ReturnedMerchants from "./pages/mms/ReturnedMerchants"; // ✅ Added import
 import Login from "./pages/mms/Login";
 import "./App.css";
 
@@ -20,6 +21,7 @@ function App() {
             <Route path="/mms/add-merchant" element={<AddMerchantForm />} />
             <Route path="/mms/merchant-requests" element={<MerchantRequests />} />
             <Route path="/mms/approved-merchants" element={<ApprovedMerchants />} />
+            <Route path="/mms/returned-merchants" element={<ReturnedMerchants />} /> {/* ✅ New Route */}
           </Routes>
         </div>
       </div>

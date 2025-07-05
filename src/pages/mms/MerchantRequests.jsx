@@ -1,49 +1,36 @@
 import React, { useState, useEffect } from "react";
+import axios from "axios";
 import "./MerchantRequests.css";
 
 function MerchantRequests() {
   const [merchantRequests, setMerchantRequests] = useState([]);
 
   useEffect(() => {
-    // Dummy data – replace with Axios call if needed
-    setMerchantRequests([
-      {
-        id: 1,
-        merchant: "MASTER LUGGAGE",
-        dba: "MASTER LUGGAGE",
-        mid: "920215331100118",
-        cnic: "4220111122221",
-        mobile: "03332221112",
-        city: "Karachi",
-        payee: "MASTER LUGGAGE",
-        address: "SHOP NO G-7, INT'L SHOPPING CENTRE",
-        email: "demo1@test.com"
-      },
-      {
-        id: 2,
-        merchant: "RAFAY'S DECOR",
-        dba: "RAFAY'S DECOR",
-        mid: "920215331100117",
-        cnic: "1111222333444",
-        mobile: "03332222333",
-        city: "Lahore",
-        payee: "RAFAY'S DECOR",
-        address: "16 SUTLEJ AVE",
-        email: "demo2@test.com"
-      }
-    ]);
+    axios.get("http://localhost:8081/api/merchants/pending")
+      .then(res => setMerchantRequests(res.data))
+      .catch(err => console.error("Error loading merchants", err));
   }, []);
 
-  const handleApprove = (id) => {
-    alert(`Merchant ${id} approved.`);
-    setMerchantRequests(prev => prev.filter(m => m.id !== id));
-    // TODO: Send status=approved to backend via Axios
+  const handleApprove = async (mid) => {
+    try {
+      await axios.put(`http://localhost:8081/api/merchants/approve/${mid}`);
+      alert(`Merchant ${mid} approved.`);
+      setMerchantRequests(prev => prev.filter(m => m.mid !== mid));
+    } catch (error) {
+      console.error("Error approving merchant", error);
+      alert("Approval failed.");
+    }
   };
 
-  const handleReject = (id) => {
-    alert(`Merchant ${id} rejected.`);
-    setMerchantRequests(prev => prev.filter(m => m.id !== id));
-    // TODO: Send status=rejected to backend via Axios
+  const handleReject = async (mid) => {
+    try {
+      await axios.delete(`http://localhost:8081/api/merchants/reject/${mid}`);
+      alert(`Merchant ${mid} rejected.`);
+      setMerchantRequests(prev => prev.filter(m => m.mid !== mid));
+    } catch (error) {
+      console.error("Error rejecting merchant", error);
+      alert("Rejection failed.");
+    }
   };
 
   return (
@@ -59,8 +46,6 @@ function MerchantRequests() {
               <th>CNIC</th>
               <th>Mobile</th>
               <th>City</th>
-              <th>Payee</th>
-              <th>Address</th>
               <th>Email</th>
               <th>Actions</th>
             </tr>
@@ -68,22 +53,16 @@ function MerchantRequests() {
           <tbody>
             {merchantRequests.map((m) => (
               <tr key={m.id}>
-                <td>{m.merchant}</td>
+                <td>{m.name}</td>
                 <td>{m.dba}</td>
                 <td>{m.mid}</td>
-                <td>{m.cnic}</td>
-                <td>{m.mobile}</td>
+                <td>{m.proprietorCnic}</td>
+                <td>{m.mobileNumber}</td>
                 <td>{m.city}</td>
-                <td>{m.payee}</td>
-                <td>{m.address}</td>
                 <td>{m.email}</td>
                 <td>
-                  <button className="approve-btn" onClick={() => handleApprove(m.id)}>
-                    Approve
-                  </button>
-                  <button className="reject-btn" onClick={() => handleReject(m.id)}>
-                    Reject
-                  </button>
+                  <button className="approve-btn" onClick={() => handleApprove(m.mid)}>Approve</button>
+                  <button className="reject-btn" onClick={() => handleReject(m.mid)}>Reject</button>
                 </td>
               </tr>
             ))}

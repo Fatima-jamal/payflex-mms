@@ -1,26 +1,26 @@
-// src/pages/mms/AddMerchantForm.jsx
 import React, { useState } from "react";
 import "../mms/AddMerchantForm.css";
 import MerchantInfo from "./steps/MerchantInfo";
 import AccountDetails from "./steps/AccountDetails";
 import OtherDetails from "./steps/OtherDetails";
+import axios from "axios";
 
 function AddMerchantForm() {
   const [step, setStep] = useState(1);
 
   const [formData, setFormData] = useState({
-    merchantName: "",
-    merchantCategory: "",
+    name: "",                 // was merchantName
+    dba: "",
+    email: "",
     proprietorCnic: "",
     mobileNumber: "",
-    dba: "",
+    merchantCategory: "",
     merchantType: "",
     cnicExpiry: "",
-    email: "",
-    revenue: "",
     city: "",
     region: "",
-    businessAddress: ""
+    businessAddress: "",
+    revenue: ""
   });
 
   const handleNext = () => {
@@ -31,11 +31,16 @@ function AddMerchantForm() {
     if (step > 1) setStep(step - 1);
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("Final Form Data:", formData);
-    // TODO: Send formData to backend via Axios POST
-    alert("Merchant submitted successfully!");
+    try {
+      const response = await axios.post("http://localhost:8081/api/merchants/submit", formData);
+      alert("Merchant submitted successfully!");
+      console.log("Submitted:", response.data);
+    } catch (error) {
+      console.error("Submission error:", error);
+      alert("Failed to submit merchant.");
+    }
   };
 
   return (

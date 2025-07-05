@@ -26,7 +26,7 @@ function Dashboard() {
         </div>
 
         {/* Returned Merchants */}
-        <div className="dashboard-card" onClick={() => navigate("/mms/approved-merchants")}>
+        <div className="dashboard-card" onClick={() => navigate("/mms/returned-merchants")}>
           <FaRetweet className="dashboard-icon" />
           <h3>Returned Merchants</h3>
           <p>Review merchants returned by Approver.</p>
