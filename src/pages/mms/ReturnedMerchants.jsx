@@ -64,7 +64,6 @@ function ReturnedMerchants() {
               <th>City</th>
               <th>CNIC</th>
               <th>Mobile</th>
-              <th>Address</th>
               <th>Email</th>
               <th>Reason</th>
               <th>Actions</th>
@@ -78,7 +77,6 @@ function ReturnedMerchants() {
                 <td>{merchant.city || "-"}</td>
                 <td>{merchant.cnic || "-"}</td>
                 <td>{merchant.phone || "-"}</td>
-                <td>{merchant.address || "-"}</td>
                 <td>{merchant.email || "-"}</td>
                 <td>
                   <textarea
