@@ -28,9 +28,7 @@ function ReturnedMerchants() {
   const updateReason = async (id, reason) => {
     try {
       await axios.put(`http://localhost:8081/api/merchants/${id}/reason`, reason, {
-        headers: {
-          "Content-Type": "text/plain",
-        },
+        headers: { "Content-Type": "text/plain" },
       });
     } catch (error) {
       console.error("Error updating reason:", error);
@@ -39,12 +37,8 @@ function ReturnedMerchants() {
 
   const handleRequestAgain = async (id) => {
     try {
-      await axios.put(`http://localhost:8081/api/merchants/${id}/request-again`, null, {
-        headers: {
-          "Content-Type": "application/json",
-        },
-      });
-      fetchReturnedMerchants(); // Refresh list
+      await axios.put(`http://localhost:8081/api/merchants/${id}/request-again`);
+      fetchReturnedMerchants();
     } catch (error) {
       console.error("Error marking merchant for resubmission:", error);
     }
@@ -61,72 +55,54 @@ function ReturnedMerchants() {
   return (
     <div className="returned-merchants-page">
       <h2>Returned Merchants</h2>
-      <table>
-        <thead>
-          <tr>
-            <th>Merchant</th>
-            <th>DBA Name</th>
-            <th>City</th>
-            <th>CNIC</th>
-            <th>Mobile</th>
-            <th>Address</th>
-            <th>Email</th>
-            <th>Reason</th>
-            <th>Action</th>
-          </tr>
-        </thead>
-        <tbody>
-          {merchants.map((merchant) => (
-            <tr key={merchant.id}>
-              <td>{merchant.name || "-"}</td>
-              <td>{merchant.dbaName || "-"}</td>
-              <td>{merchant.city || "-"}</td>
-              <td>{merchant.cnic || "-"}</td>
-              <td>{merchant.phone || "-"}</td>
-              <td>{merchant.address || "-"}</td>
-              <td>{merchant.email || "-"}</td>
-              <td>
-                <textarea
-                  rows={3}
-                  value={merchant.rejectionReason || ""}
-                  onChange={(e) => handleReasonChange(e, merchant.id)}
-                  onBlur={() => updateReason(merchant.id, merchant.rejectionReason)}
-                />
-              </td>
-              <td>
-                <button
-                  onClick={() => handleRequestAgain(merchant.id)}
-                  style={{
-                    backgroundColor: "#6a0dad",
-                    color: "white",
-                    border: "none",
-                    padding: "6px 12px",
-                    marginBottom: "5px",
-                    cursor: "pointer",
-                    borderRadius: "4px",
-                  }}
-                >
-                  Request Again
-                </button>
-                <br />
-                <button
-                  onClick={() => handleEmail(merchant.email)}
-                  style={{
-                    backgroundColor: "#8000ff",
-                    color: "white",
-                    border: "none",
-                    padding: "6px 12px",
-                    cursor: "pointer",
-                    borderRadius: "4px",
-                  }}
-                >
-                  Email
-                </button>
-              </td>
+      <div className="table-container">
+        <table>
+          <thead>
+            <tr>
+              <th>Merchant</th>
+              <th>DBA Name</th>
+              <th>City</th>
+              <th>CNIC</th>
+              <th>Mobile</th>
+              <th>Address</th>
+              <th>Email</th>
+              <th>Reason</th>
+              <th>Actions</th>
             </tr>
-          ))}
-        </tbody>
-      </table>
+          </thead>
+          <tbody>
+            {merchants.map((merchant) => (
+              <tr key={merchant.id}>
+                <td>{merchant.name || "-"}</td>
+                <td>{merchant.dbaName || "-"}</td>
+                <td>{merchant.city || "-"}</td>
+                <td>{merchant.cnic || "-"}</td>
+                <td>{merchant.phone || "-"}</td>
+                <td>{merchant.address || "-"}</td>
+                <td>{merchant.email || "-"}</td>
+                <td>
+                  <textarea
+                    className="reason-box"
+                    rows={3}
+                    value={merchant.rejectionReason || ""}
+                    onChange={(e) => handleReasonChange(e, merchant.id)}
+                    onBlur={() => updateReason(merchant.id, merchant.rejectionReason)}
+                  />
+                </td>
+                <td>
+                  <button className="purple-button small-button" onClick={() => handleRequestAgain(merchant.id)}>
+                    Request Again
+                  </button>
+                  <br />
+                  <button className="purple-button small-button" onClick={() => handleEmail(merchant.email)}>
+                    Email
+                  </button>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
     </div>
   );
 }

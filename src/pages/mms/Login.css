@@ -65,3 +65,30 @@
   margin-bottom: 10px;
   text-align: center;
 }
+.login-options {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 16px 0;
+  font-size: 14px;
+  padding: 0 2px;
+}
+
+.remember-me {
+  display: flex;
+  align-items: center;
+  font-weight: 500;
+  gap: 6px;
+  color: #4b0082;
+}
+
+.forgot-password {
+  font-weight: 600;
+  color: #4b0082;
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.forgot-password:hover {
+  color: #3a006e;
+}

@@ -38,3 +38,56 @@ th {
 tr:hover {
   background-color: #f9f5ff;
 }
+.search-bar {
+  margin-bottom: 20px;
+}
+
+.search-bar input {
+  padding: 10px 14px;
+  width: 300px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 14px;
+  outline: none;
+  transition: 0.3s ease;
+}
+
+.search-bar input:focus {
+  border-color: #a855f7;
+  box-shadow: 0 0 4px rgba(168, 85, 247, 0.3);
+}
+.table-container {
+  overflow-x: auto;
+}
+
+.reason-box {
+  width: 220px;
+  padding: 8px;
+  font-size: 13px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  resize: vertical;
+  font-family: inherit;
+}
+
+.purple-button {
+  background-color: #7b1fa2;
+  color: white;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 6px;
+  font-size: 13px;
+  cursor: pointer;
+  margin-bottom: 5px;
+  transition: background-color 0.2s ease;
+}
+
+.purple-button:hover {
+  background-color: #5e1480;
+}
+
+.small-button {
+  width: fit-content;
+  align-self: flex-start;
+}
+

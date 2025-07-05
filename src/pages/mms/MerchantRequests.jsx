@@ -4,6 +4,7 @@ import "./MerchantRequests.css";
 
 function MerchantRequests() {
   const [merchantRequests, setMerchantRequests] = useState([]);
+  const [searchQuery, setSearchQuery] = useState("");
 
   useEffect(() => {
     axios.get("http://localhost:8081/api/merchants/pending")
@@ -33,9 +34,24 @@ function MerchantRequests() {
     }
   };
 
+  const filteredMerchants = merchantRequests.filter((m) =>
+    m.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+    m.mid.includes(searchQuery)
+  );
+
   return (
     <div className="merchant-requests-page">
       <h2>Merchant Requests</h2>
+
+      <div className="search-bar">
+        <input
+          type="text"
+          placeholder="Search by name or MID..."
+          value={searchQuery}
+          onChange={(e) => setSearchQuery(e.target.value)}
+        />
+      </div>
+
       <div className="table-wrapper">
         <table>
           <thead>
@@ -51,13 +67,13 @@ function MerchantRequests() {
             </tr>
           </thead>
           <tbody>
-            {merchantRequests.map((m) => (
+            {filteredMerchants.map((m) => (
               <tr key={m.id}>
                 <td>{m.name}</td>
-                <td>{m.dba}</td>
+                <td>{m.dbaName}</td>
                 <td>{m.mid}</td>
-                <td>{m.proprietorCnic}</td>
-                <td>{m.mobileNumber}</td>
+                <td>{m.cnic}</td>
+                <td>{m.phone}</td>
                 <td>{m.city}</td>
                 <td>{m.email}</td>
                 <td>
