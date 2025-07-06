@@ -1,94 +1,83 @@
-.login-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
+.mms-login-container {
   height: 100vh;
-  background-color: #f6f3fb;
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Segoe UI', sans-serif;
 }
 
-.login-box {
-  background-color: white;
+.mms-login-glass {
+  width: 420px;
   padding: 40px;
-  border: 1px solid #c9a6f5;
-  border-radius: 8px;
-  width: 360px;
-  box-shadow: 0 4px 10px rgba(128, 0, 128, 0.1);
-}
-
-.login-heading {
-  margin-bottom: 25px;
+  background: rgba(255, 255, 255, 0.3);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border-radius: 16px;
+  box-shadow: 0 8px 40px rgba(0, 0, 0, 0.4);
   text-align: center;
-  color: #4b0082;
-  font-size: 22px;
-  font-weight: bold;
+  border: 1px solid rgba(255, 255, 255, 0.4);
 }
 
-.form-group {
-  margin-bottom: 18px;
+.mms-login-glass h2 {
+  font-size: 24px;
+  font-weight: 700;
+  color: #4a0072;
+  margin-bottom: 6px;
+}
+
+.mms-login-glass p {
+  font-size: 13px;
+  color: #333;
+  margin-bottom: 22px;
+}
+
+.mms-login-form {
   display: flex;
   flex-direction: column;
+  gap: 14px;
+  text-align: left;
 }
 
-.form-group label {
-  margin-bottom: 5px;
-  font-size: 14px;
-  color: #333;
+.mms-login-form label {
+  font-size: 13px;
+  color: #222;
+  margin-left: 3px;
 }
 
-.form-group input {
-  padding: 10px;
-  border: 1px solid #d5c3ee;
-  border-radius: 4px;
-  font-size: 14px;
-}
-
-.login-button {
-  background-color: #5e2ca5;
-  color: white;
+.mms-login-form input {
+  padding: 12px;
   border: none;
-  width: 100%;
-  padding: 10px;
-  border-radius: 4px;
-  font-size: 15px;
-  cursor: pointer;
+  border-radius: 8px;
+  background-color: rgba(255, 255, 255, 0.95);
+  color: #333;
+  font-size: 14px;
+}
+
+.mms-login-form input::placeholder {
+  color: #666;
+}
+
+.mms-login-form button {
   margin-top: 10px;
+  padding: 12px;
+  background-color: #6a1b9a;
+  color: white;
+  font-weight: bold;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
 }
 
-.login-button:hover {
-  background-color: #4a2182;
+.mms-login-form button:hover {
+  background-color: #4a0072;
 }
 
-.error-message {
+.error-msg {
   color: red;
   font-size: 13px;
-  margin-top: -8px;
-  margin-bottom: 10px;
-  text-align: center;
-}
-.login-options {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin: 16px 0;
-  font-size: 14px;
-  padding: 0 2px;
-}
-
-.remember-me {
-  display: flex;
-  align-items: center;
-  font-weight: 500;
-  gap: 6px;
-  color: #4b0082;
-}
-
-.forgot-password {
-  font-weight: 600;
-  color: #4b0082;
-  text-decoration: none;
-  transition: color 0.2s;
-}
-
-.forgot-password:hover {
-  color: #3a006e;
+  margin-top: -10px;
+  margin-bottom: -5px;
 }

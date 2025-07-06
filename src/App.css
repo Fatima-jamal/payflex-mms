@@ -1,6 +1,6 @@
 .page-container {
   padding: 40px;
   padding-left: 360px; /* Match your sidebar width */
-  background-color: #f8f8f8;
   min-height: 100vh;
+  background: linear-gradient(to bottom right, #f9e6f3, #efe3ff); /* pastel pink to purple */
 }

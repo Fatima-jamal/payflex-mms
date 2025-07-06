@@ -21,6 +21,14 @@ const ApprovedMerchants = () => {
     }));
   };
 
+  const handleEmailClick = (merchant) => {
+    const subject = encodeURIComponent("Your PayFlex Merchant Credentials");
+    const body = encodeURIComponent(
+      `Dear ${merchant.name},\n\nHere are your credentials for accessing the PayFlex system:\n\nEmail: ${merchant.email}\nPassword: ${merchant.password}\n\nPlease login at: https://payflex-app.fatima-jamal.com\n\nRegards,\nPayFlex Team`
+    );
+    window.location.href = `mailto:${merchant.email}?subject=${subject}&body=${body}`;
+  };
+
   const filteredMerchants = approvedMerchants.filter((merchant) =>
     merchant.dbaName?.toLowerCase().includes(searchQuery.toLowerCase()) ||
     merchant.mid?.includes(searchQuery) ||
@@ -50,7 +58,6 @@ const ApprovedMerchants = () => {
               <th>Mobile</th>
               <th>City</th>
               <th>Merchant Name</th>
-              <th>Address</th>
               <th>Email</th>
               <th>Password</th>
             </tr>
@@ -64,11 +71,15 @@ const ApprovedMerchants = () => {
                 <td>{merchant.phone || '-'}</td>
                 <td>{merchant.city || '-'}</td>
                 <td>{merchant.name || '-'}</td>
-                <td>{merchant.address || '-'}</td>
                 <td>
                   <div className="email-cell">
                     <strong>{merchant.email}</strong>
-                    <button className="purple-button small-button">Email Credentials</button>
+                    <button
+                      className="purple-button small-button"
+                      onClick={() => handleEmailClick(merchant)}
+                    >
+                      Email Credentials
+                    </button>
                   </div>
                 </td>
                 <td>
